@@ -181,7 +181,7 @@ uvicorn app:app --reload
 >
 > - [Email](mailto:thamarniyo@gmail.com), [GitHub](https://github.com/niyotham), [LinkedIn](https://www.linkedin.com/in/thamar-niyomukiza-230959125/)
 
-## Show us your support
+## Show us your support!
 
 > Give us a ⭐ if you like this project, and also feel free to contact us at any moment.
 
