@@ -1,4 +1,9 @@
 
+from datetime import datetime, date
+import json
+import pandas as pd
+import consumer
+from kafka import KafkaConsumer
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator

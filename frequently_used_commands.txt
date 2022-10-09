@@ -1,0 +1,56 @@
+https://www.youtube.com/watch?v=SQuh7CI1DV8&ab_channel=StephaneMaarek - technical
+https://www.youtube.com/watch?v=aj9CDZm0Glc&ab_channel=IBMTechnology - theory
+
+
+    --- start zookeeper
+kafka/bin/zookeeper-server-start.sh kafka/config/zookeeper.properties
+
+
+    --- start kafka
+kafka/bin/kafka-server-start.sh kafka/config/server.properties
+
+
+    --- CREATE TOPICS
+kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 4
+
+kafka-topics.sh --create --topic g1-raw-text-data-topic-dev --bootstrap-server b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092,b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092 --replication-factor 1 --partitions 4
+
+    --- DELETE TOPICS
+Ensure that the Kafka brokers allow for topic deletion delete.topic.enable=true (default)
+
+kafka-topics.sh --bootstrap-server b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092,b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092 --delete --topic g1-raw-text-data-top
+
+
+    --- CREATE CONSUMER/PRODUCER
+kafka-console-producer.sh --topic topic_name --bootstrap-server localhost:9092
+kafka-console-consumer.sh --topic g1-raw-text-data-topic-dev --bootstrap-server b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092,b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092 --from-beginning
+
+
+    --- list topics
+bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+bin/kafka-topics.sh --list --bootstrap-server b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092,b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092
+
+
+    --- docker commands
+sudo docker exec -it -u root 27fb2d00367f /bin/bash
+echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
+
+docker-compose up
+sudo docker-compose stop
+
+
+    --- bootstrap servers for AWS kafka cluster
+b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092,b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092
+
+
+    --- AIRFLOW run on local host
+ssh -L localhost:8080:localhost:8080 fisseha_estifanos@g1.10academy.org
+
+
+    --- S3 bucket
+here: /mnt/10ac-batch-6/notebooks/<user-name>
+
+
+pip install kafka-python
+sudo pip uninstall kafka-python
+sudo docker exec -it -u root 3903f8298a85 /bin/bash

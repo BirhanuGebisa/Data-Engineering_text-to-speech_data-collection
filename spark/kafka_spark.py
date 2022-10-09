@@ -1,3 +1,4 @@
+import findspark
 import os
 import pyspark.sql.functions as F
 from pyspark.sql import SparkSession
@@ -7,13 +8,10 @@ from pyspark.sql.types import StructField, StructType, IntegerType, \
 audio_data = "/mnt/10ac-batch-6/week7/chang/kafka"
 topic_input = "test"
 
-import findspark
 findspark.init('/opt/spark')
 
-import os
 os.environ['PYSPARK_SUBMIT_ARGS'] =\
-     '--packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0 pyspark-shell'
-
+    '--packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0 pyspark-shell'
 
 
 def main():
@@ -29,7 +27,7 @@ def main():
     # summarize_sales(df_audio)
 
 
-def read_from_kafka(spark):#, params):
+def read_from_kafka(spark):  # , params):
     options_read = {
         "kafka.bootstrap.servers":
             "localhost:9092",
@@ -44,5 +42,3 @@ def read_from_kafka(spark):#, params):
         .load()
 
     return df_audio
-
-

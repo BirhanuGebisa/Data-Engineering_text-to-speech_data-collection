@@ -7,10 +7,7 @@ const axios = require('axios')
 
 function App(){ 
   return(
-
       <Home/>
-   
-      
   )
 }
 
