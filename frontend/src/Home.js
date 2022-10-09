@@ -1,3 +1,4 @@
+// frontend connection
 import React, { useEffect } from 'react'
 import { useState } from "react";
 import { Recorder } from "react-voice-recorder";
